@@ -27,3 +27,8 @@
   src: url('//cdn.8thwall.com/web/fonts/Nunito-SemiBold.woff') format('woff'), /* Modern Browsers */
        url('//cdn.8thwall.com/web/fonts/Nunito-SemiBold.ttf')  format('truetype') /* Safari, Android, iOS */
 }
+
+@font-face {
+  font-family: "futura-font";
+  src: url('../assets/fonts/Futura_Bold.ttf');
+}

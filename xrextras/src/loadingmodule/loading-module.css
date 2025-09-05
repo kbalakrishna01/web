@@ -1,11 +1,126 @@
+.spinner {
+  width: 100%;
+  text-align: center;
+}
+
+.spinner>div {
+  width: 16px;
+  height: 16px;
+  margin-left: 1vw;
+  border-radius: 50px;
+  background-color: #ffffff;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.logo {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 8%;
+}
+
+.width50 {
+  width: 50%;
+}
+
+.load-container {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  bottom: 20;
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.load-text {
+  font-size: 4vw;
+  margin: 0;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.48s;
+  /* Adjusted delay */
+  background: #ffffff;
+  animation-delay: -0.48s;
+  /* Adjusted delay */
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+  background: #ffffff;
+}
+
+.spinner .bounce3 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+  background: #ffffff;
+}
+
+.spinner .bounce4 {
+  -webkit-animation-delay: 0s;
+  /* Adjusted delay */
+  animation-delay: 0s;
+  /* Adjusted delay */
+  background: #ffffff;
+}
+
+.spinner .bounce5 {
+  -webkit-animation-delay: 0.16s;
+  /* Adjusted delay */
+  animation-delay: 0.16s;
+  /* Adjusted delay */
+  background: #ffffff;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+  }
+
+  40% {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes sk-bouncedelay {
+
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
 #loadingContainer {
   z-index: 800;
   font-family: 'Nunito-SemiBold', sans-serif;
 }
 
+#splash,
 #loadBackground {
   z-index: 10;
-  background-color: #101118;
+  background-color: #ebc1d5;
+  background-image: url('../assets/ui/BG.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   pointer-events: auto;
 }
 
@@ -13,7 +128,16 @@
   background-color: white;
 }
 
+.load-hindi {
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 60%;
+  width: 60%;
+}
+
 #requestingCameraPermissions {
+  visibility: hidden;
   z-index: 11;
   position: absolute;
   top: 0;
@@ -46,15 +170,18 @@
 }
 
 /* camera and micrphone permission related styles */
-#cameraPermissionsErrorApple, #microphonePermissionsErrorApple {
+#cameraPermissionsErrorApple,
+#microphonePermissionsErrorApple {
   background-color: #101118;
 }
 
-.xrextras-old-style #cameraPermissionsErrorApple, .xrextras-old-style #microphonePermissionsErrorApple {
+.xrextras-old-style #cameraPermissionsErrorApple,
+.xrextras-old-style #microphonePermissionsErrorApple {
   background-color: white;
 }
 
-#cameraPermissionsErrorAppleMessage, #microphonePermissionsErrorAppleMessage {
+#cameraPermissionsErrorAppleMessage,
+#microphonePermissionsErrorAppleMessage {
   font-size: 1.75em;
   text-align: center;
   max-width: 90vw;
@@ -64,7 +191,8 @@
   color: white;
 }
 
-.xrextras-old-style #cameraPermissionsErrorAppleMessage, .xrextras-old-style #microphonePermissionsErrorAppleMessage {
+.xrextras-old-style #cameraPermissionsErrorAppleMessage,
+.xrextras-old-style #microphonePermissionsErrorAppleMessage {
   color: #323232;
 }
 
@@ -74,10 +202,12 @@
   margin-top: 17vh;
   text-align: center;
 }
+
 .permissionIconIos img {
   height: 20vw;
 }
-.permissionIconIos img + img {
+
+.permissionIconIos img+img {
   margin-left: 10vw;
 }
 
@@ -90,7 +220,8 @@
   font-size: 1.25em;
 }
 
-#cameraPermissionsErrorAndroid, #microphonePermissionsErrorAndroid {
+#cameraPermissionsErrorAndroid,
+#microphonePermissionsErrorAndroid {
   padding: 2vh 0;
   display: flex;
   flex-direction: column;
@@ -100,7 +231,8 @@
   background-color: #101118;
 }
 
-.xrextras-old-style #cameraPermissionsErrorAndroid, .xrextras-old-style #microphonePermissionsErrorAndroid {
+.xrextras-old-style #cameraPermissionsErrorAndroid,
+.xrextras-old-style #microphonePermissionsErrorAndroid {
   background-color: white;
 }
 
@@ -118,15 +250,17 @@
 }
 
 .xrextras-old-style #deviceMotionErrorApple {
-  color: #2D2E43;
+  color: #2d2e43;
   background-color: white;
 }
 
-#linkOutViewAndroid, #copyLinkViewAndroid {
+#linkOutViewAndroid,
+#copyLinkViewAndroid {
   background-color: #101118;
 }
 
-.xrextras-old-style #linkOutViewAndroid, .xrextras-old-style #copyLinkViewAndroid {
+.xrextras-old-style #linkOutViewAndroid,
+.xrextras-old-style #copyLinkViewAndroid {
   background-color: #fff;
 }
 
@@ -149,7 +283,7 @@
 .main-button {
   border: none;
   outline: none;
-  background-color: #AD50FF;
+  background-color: #ad50ff;
   color: white;
   font-size: 2.5vh;
   display: block;
@@ -159,7 +293,7 @@
 }
 
 .xrextras-old-style .main-button {
-  background-color: #7611B7;
+  background-color: #7611b7;
 }
 
 .start-ar-button {
@@ -174,7 +308,7 @@
   color: white;
   text-decoration: none;
   border: none;
-  background-color: #AD50FF;
+  background-color: #ad50ff;
   padding: 6px 13px;
   border-radius: 10px;
 }
@@ -248,7 +382,7 @@
 }
 
 .xrextras-old-style .loading-error-instructions {
-  color: #2D2E43;
+  color: #2d2e43;
 }
 
 .loading-error-instructions>li {
@@ -259,7 +393,7 @@
 .loading-error-instructions>li>img {
   max-height: 3vh;
   vertical-align: middle;
-  margin: 0 .5vh;
+  margin: 0 0.5vh;
 }
 
 .loading-error-instructions>li:before {
@@ -290,41 +424,41 @@
 }
 
 .xrextras-old-style .highlight {
-  color: #7611B7;
+  color: #7611b7;
 }
 
 .camera-instruction-block {
   display: inline-block;
-  background-color: #8083A2;
+  background-color: #8083a2;
   padding: 1vh;
 }
 
 .xrextras-old-style .camera-instruction-block {
-  background-color: #EBEBEB;
+  background-color: #ebebeb;
 }
 
 .camera-instruction-button {
   display: inline-block;
   padding: 1vh;
-  background-color: #359AFF;
+  background-color: #359aff;
   color: white;
   font-size: 2vh;
-  box-shadow: 0 .125vh .25vh rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0.125vh 0.25vh rgba(0, 0, 0, 0.5);
 }
 
 body:not(.xrextras-old-style) .prompt-box-8w {
-  background-color: #3A3B55;
+  background-color: #3e0e5a;
   color: #fff;
   text-align: center;
 }
 
 body:not(.xrextras-old-style) .prompt-button-8w {
-  background-color: #8083A2;
+  background-color: #a44eb7;
   border-radius: 10px;
 }
 
 body:not(.xrextras-old-style) .button-primary-8w {
-  background-color: #AD50FF;
+  background-color: #ff946b;
 }
 
 .fade-out {
@@ -335,27 +469,29 @@ body:not(.xrextras-old-style) .button-primary-8w {
   0% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
 }
 
 .spin {
-  animation: spin 1.1s cubic-bezier(0.785, 0.135, 0.150, 0.860) infinite both;
+  animation: spin 1.1s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite both;
 }
 
 @keyframes spin {
   0% {
     transform: rotate(0);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
 
 .scale {
-  -webkit-animation: scale 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite alternate-reverse both;
-  animation: scale 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite alternate-reverse both;
+  -webkit-animation: scale 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite alternate-reverse both;
+  animation: scale 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite alternate-reverse both;
 }
 
 @keyframes scale {
@@ -363,6 +499,7 @@ body:not(.xrextras-old-style) .button-primary-8w {
     -webkit-transform: scale(0.5);
     transform: scale(0.5);
   }
+
   100% {
     -webkit-transform: scale(1);
     transform: scale(1);
@@ -379,10 +516,12 @@ body:not(.xrextras-old-style) .button-primary-8w {
     -webkit-transform: scale(1);
     transform: scale(1);
   }
+
   50% {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
   }
+
   100% {
     -webkit-transform: scale(1);
     transform: scale(1);

@@ -1,4 +1,6 @@
+/* globals AFRAME THREE */
 import type {ComponentDefinition} from 'aframe'
+import * as THREE from 'three';
 
 declare const XRExtras: any
 declare const XR8: any
