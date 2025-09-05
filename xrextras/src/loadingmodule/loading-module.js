@@ -126,6 +126,66 @@ function create() {
     }, 400)
   }
 
+  const shapeCount = 40
+
+  const interval = setInterval(() => {
+    const container = document.querySelector('.background-shapes')
+
+    if (container) {
+      clearInterval(interval)
+
+      for (let i = 0; i < shapeCount; i++) {
+        const isStar = Math.random() > 0.5
+        const el = document.createElement('div')
+        el.className = `shape ${isStar ? 'star' : 'circle'}`
+
+        // Size
+        const size = isStar
+          ? Math.random() * 10 + 5  // 5–15px
+          : Math.random() * 4 + 3   // 3–7px
+        el.style.width = `${size}px`
+        el.style.height = `${size}px`
+
+        // Opacity (0.2 to 1)
+        el.style.opacity = (0.2 + Math.random() * 0.8).toFixed(2)
+
+        // Initial position
+        const pos = {
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+        }
+
+        // Random small velocity (-0.2 to 0.2 px/frame)
+        const velocity = {
+          x: (Math.random() - 0.5) * 0.8,
+          y: (Math.random() - 0.5) * 0.8,
+        }
+
+        // Set initial position
+        el.style.left = `${pos.x}px`
+        el.style.top = `${pos.y}px`
+
+        // Animate via requestAnimationFrame
+        const move = () => {
+          pos.x += velocity.x
+          pos.y += velocity.y
+
+          // Wrap around screen
+          if (pos.x < -size) pos.x = window.innerWidth + size
+          if (pos.x > window.innerWidth + size) pos.x = -size
+          if (pos.y < -size) pos.y = window.innerHeight + size
+          if (pos.y > window.innerHeight + size) pos.y = -size
+
+          el.style.transform = `translate(${pos.x}px, ${pos.y}px)`
+          requestAnimationFrame(move)
+        }
+
+        requestAnimationFrame(move)
+        container.appendChild(el)
+      }
+    }
+  }, 50)
+
   const showCameraPermissionsPrompt = () => {
     camPermissionsRequest_.classList.remove('hidden')
   }

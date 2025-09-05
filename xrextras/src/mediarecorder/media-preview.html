@@ -1,13 +1,11 @@
 <div id="previewContainer">
   <div class="top-bar">
     <div class="preview-box">
-      <button id="closePreviewButton" class="style-reset icon-button">
-        <img src="//cdn.8thwall.com/web/img/mediarecorder/close-v2.svg">
-      </button>
-      <img id="imagePreview">
+      <img id="closePreviewButton" src="../../assets/ui/Back_Button.png" />
+      <img id="imagePreview" />
       <video id="videoPreview" playsinline loop></video>
-      <button id="toggleMuteButton" class="style-reset icon-button" >
-        <img id="muteButtonImg" src="//cdn.8thwall.com/web/img/mediarecorder/sound-on-v1.svg">
+      <button id="toggleMuteButton" class="style-reset icon-button">
+        <img id="muteButtonImg" src="//cdn.8thwall.com/web/img/mediarecorder/sound-on-v1.svg" />
       </button>
     </div>
   </div>
@@ -17,14 +15,15 @@
       <div id="finalizeText"></div>
       <progress id="finalizeProgressBar" value="0" max="100"></progress>
     </div>
-    <button id="downloadButton" class="style-reset icon-button">
-      <img src="//cdn.8thwall.com/web/img/mediarecorder/download-v1.svg">
-    </button>
     <div id="openSafariText" class="style-reset">Downloading is only available in Safari</div>
     <div id="tapAndHoldText" class="style-reset">Tap + Hold to Share</div>
-    <button id="actionButton" class="style-reset show-with-download-button">
-      <span id="actionButtonText"></span>
-      <img id="actionButtonImg">
-    </button>
+    <div class="flex centerContent justify-evenly width100 flex-wrap mb1">
+      <div id="downloadButton" class="width40 button mx-auto relative">
+        <p id="downloadButtonText" class="relative zi1 margin0 fw700 black-mmalika-font">Download</p>
+      </div>
+      <div id="actionButton" class="width40 button mx-auto relative">
+        <p id="actionButtonText" class="relative zi1 margin0 fw700 black-mmalika-font">Share</p>
+      </div>
+    </div>
   </div>
 </div>

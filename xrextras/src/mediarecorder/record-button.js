@@ -201,7 +201,6 @@ const up = () => {
     return
   }
   isDown = false
-
   if (captureMode !== 'standard') {
     return
   }

@@ -1,11 +1,93 @@
 <div id="loadingContainer" class="absolute-fill">
   <!--Loading screen-->
   <div id="loadBackground" class="absolute-fill">
-    <div id="loadImageContainer" class="absolute-fill">
-      <img src="//cdn.8thwall.com/web/img/loading/v2/load-grad.png" id="loadImage" class="spin" />
-      <img class='foreground-image poweredby-img'
-        src="//cdn.8thwall.com/web/img/almostthere/v2/poweredby-horiz-white-4.svg" />
+    <div class="thread-container">
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
     </div>
+    <div class="thread-container2">
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+    </div>
+
+    <div class="thread-container3">
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+    </div>
+    <div class="background-shapes">
+      <!-- Multiple shapes -->
+      <div class="shape star"></div>
+      <div class="shape circle"></div>
+      <div class="shape star"></div>
+      <div class="shape circle"></div>
+      <!-- Add more as needed -->
+    </div>
+    <div class="absolute flexColumn centerContent centerScreen top43 width100" style="gap: 2vh">
+      <img class="width45" src="../../assets/ui/Logo.png" />
+      <div class="flexColumn centerContent">
+        <p class="margin0 unbox-text">Unboxing Celebrations</p>
+        <p class="margin0 text-2">Personalise your festive wish</p>
+      </div>
+      <img class="width85" style="margin-top: 0vw" src="../../assets/ui/Pack.png" />
+    </div>
+    <div id="loadImageContainer" class="absolute-fill">
+      <div class="spinner absolute">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+        <p class="absolute centerHori text-yellow mt3 font1 top41">Loading...</p>
+      </div>
+    </div>
+    <img class="foreground-image poweredby-img" src="../../assets/powered_by_X.png" />
   </div>
 
   <!--Camera Permissions-->
@@ -17,24 +99,25 @@
   <!--Permission error, camera, iOS-->
   <div id="cameraPermissionsErrorApple" class="absolute-fill hidden">
     <div class="permissionIconIos">
-      <img class='foreground-image' src="//cdn.8thwall.com/web/img/loading/v2/camera.svg" />
+      <img class="foreground-image" src="//cdn.8thwall.com/web/img/loading/v2/camera.svg" />
     </div>
-    <p id="cameraPermissionsErrorAppleMessage">
-      Reload the page and enable camera access
-    </p>
-    <div class='bottom-message'>
-      Ensure camera access is allowed in <span class='wk-app-name'></span> app settings
+    <p id="cameraPermissionsErrorAppleMessage">Reload the page and enable camera access</p>
+    <div class="bottom-message">
+      Ensure camera access is allowed in <span class="wk-app-name"></span> app settings
     </div>
   </div>
 
   <!--Permission error, camera, Android-->
   <div id="cameraPermissionsErrorAndroid" class="absolute-fill hidden">
     <div class="permissionIcon">
-      <img class='foreground-image' src="//cdn.8thwall.com/web/img/loading/v2/camera.svg" />
+      <img class="foreground-image" src="//cdn.8thwall.com/web/img/loading/v2/camera.svg" />
     </div>
     <div class="loading-error-header">Let's enable your camera</div>
     <ol class="loading-error-instructions">
-      <li>Tap the <img class='foreground-image' src="//cdn.8thwall.com/web/img/loading/v2/dots.svg"> in the top right
+      <li>
+        Tap the
+        <img class="foreground-image" src="//cdn.8thwall.com/web/img/loading/v2/dots.svg" /> in the
+        top right
       </li>
       <li>Tap Settings</li>
       <li class="chrome-instruction hidden">
@@ -45,7 +128,7 @@
       </li>
       <li class="chrome-instruction hidden">
         <span class="highlight">Blocked</span>
-        <br>
+        <br />
         <span class="camera-instruction-block domain-view">apps.8thwall.com</span>
       </li>
       <li class="chrome-instruction hidden">
@@ -58,7 +141,7 @@
         <span class="highlight">Manage website data</span>
       </li>
       <li class="samsung-instruction hidden">
-        Press and hold<br>
+        Press and hold<br />
         <span class="camera-instruction-block domain-view">apps.8thwall.com</span>
       </li>
       <li class="samsung-instruction hidden">
@@ -66,7 +149,9 @@
       </li>
     </ol>
     <div class="loading-error-footer">
-      <img class='foreground-image' style="transform: rotate(130deg);"
+      <img
+        class="foreground-image"
+        style="transform: rotate(130deg)"
         src="//cdn.8thwall.com/web/img/loading/v2/reload.svg" />
       Then, reload the page for AR!
     </div>
@@ -74,26 +159,29 @@
 
   <!--Permission error, microphone + camera, iOS-->
   <div id="microphonePermissionsErrorApple" class="absolute-fill hidden">
-    <div class='permissionIconIos'>
-      <img class='foreground-image' src="//cdn.8thwall.com/web/img/loading/v2/camera.svg" />
-      <img class='foreground-image' src="//cdn.8thwall.com/web/img/loading/v2/microphone.svg" />
+    <div class="permissionIconIos">
+      <img class="foreground-image" src="//cdn.8thwall.com/web/img/loading/v2/camera.svg" />
+      <img class="foreground-image" src="//cdn.8thwall.com/web/img/loading/v2/microphone.svg" />
     </div>
     <p id="microphonePermissionsErrorAppleMessage">
       Reload the page and enable camera + microphone access
     </p>
-    <div class='bottom-message'>
-      Ensure camera + microphone access is allowed in <span class='wk-app-name'></span> app settings
+    <div class="bottom-message">
+      Ensure camera + microphone access is allowed in <span class="wk-app-name"></span> app settings
     </div>
   </div>
 
   <!--Permission error, microphone + camera, Android-->
   <div id="microphonePermissionsErrorAndroid" class="absolute-fill hidden">
     <div class="permissionIcon">
-      <img class='foreground-image' src="//cdn.8thwall.com/web/img/loading/v2/microphone.svg" />
+      <img class="foreground-image" src="//cdn.8thwall.com/web/img/loading/v2/microphone.svg" />
     </div>
     <div class="loading-error-header">Let's enable your microphone</div>
     <ol class="loading-error-instructions">
-      <li>Tap the <img class='foreground-image' src="//cdn.8thwall.com/web/img/loading/v2/dots.svg"> in the top right
+      <li>
+        Tap the
+        <img class="foreground-image" src="//cdn.8thwall.com/web/img/loading/v2/dots.svg" /> in the
+        top right
       </li>
       <li>Tap Settings</li>
       <li class="chrome-instruction hidden">
@@ -104,7 +192,7 @@
       </li>
       <li class="chrome-instruction hidden">
         <span class="highlight">Blocked</span>
-        <br>
+        <br />
         <span class="microphone-instruction-block domain-view">apps.8thwall.com</span>
       </li>
       <li class="chrome-instruction hidden">
@@ -120,7 +208,7 @@
         <span class="highlight">Manage website data</span>
       </li>
       <li class="samsung-instruction hidden">
-        Press and hold<br>
+        Press and hold<br />
         <span class="microphone-instruction-block domain-view">apps.8thwall.com</span>
       </li>
       <li class="samsung-instruction hidden">
@@ -128,7 +216,9 @@
       </li>
     </ol>
     <div class="loading-error-footer">
-      <img class='foreground-image' style="transform: rotate(130deg);"
+      <img
+        class="foreground-image"
+        style="transform: rotate(130deg)"
         src="//cdn.8thwall.com/web/img/loading/v2/reload.svg" />
       Then, reload the page for AR!
     </div>
@@ -137,10 +227,12 @@
   <div id="linkOutViewAndroid" class="absolute-fill hidden">
     <div class="error-text-outer-container">
       <div class="error-text-container error-margin-top-5">
-        <img id="app_img" class="app-header-img unknown">
+        <img id="app_img" class="app-header-img unknown" />
         <br />
         <a id="open_browser_android" class="start-ar-button">Start AR</a>
-        <img class="foreground-image poweredby-img" src="//cdn.8thwall.com/web/img/almostthere/v2/poweredby-horiz-white-4.svg">
+        <img
+          class="foreground-image poweredby-img"
+          src="//cdn.8thwall.com/web/img/almostthere/v2/poweredby-horiz-white-4.svg" />
       </div>
     </div>
   </div>
@@ -149,13 +241,18 @@
     <div class="error-text-outer-container">
       <div class="error-text-container error-margin-top-5">
         <span id="error_text_header_unknown" class="open-header-unknown">
-          <h2>Open in Browser<br /> to view AR</h2>
+          <h2>
+            Open in Browser<br />
+            to view AR
+          </h2>
         </span>
-        <img id="app_img" class="app-header-img unknown">
+        <img id="app_img" class="app-header-img unknown" />
         <br />
         <span id="app_link" class="desktop-home-link mobile"></span>
         <button id="copy_link_android" class="copy-link-btn">Copy Link</button>
-        <img class="foreground-image poweredby-img" src="//cdn.8thwall.com/web/img/almostthere/v2/poweredby-horiz-white-4.svg">
+        <img
+          class="foreground-image poweredby-img"
+          src="//cdn.8thwall.com/web/img/almostthere/v2/poweredby-horiz-white-4.svg" />
       </div>
     </div>
   </div>
@@ -164,12 +261,26 @@
   <div id="deviceMotionErrorApple" class="absolute-fill hidden">
     <div class="loading-error-header">Let's enable your motion sensors</div>
     <ol class="loading-error-instructions">
-      <li>Open <img src="https://cdn.8thwall.com/web/img/loading/v1/settings-icon-ios.png"
-          style="max-height: 4vh"><b>Settings</b></li>
-      <li>Select <img src="https://cdn.8thwall.com/web/img/loading/v1/safari-icon.png"
-          style="max-height: 4vh"><b>Safari</b></li>
+      <li>
+        Open
+        <img
+          src="https://cdn.8thwall.com/web/img/loading/v1/settings-icon-ios.png"
+          style="max-height: 4vh" /><b>Settings</b>
+      </li>
+      <li>
+        Select
+        <img
+          src="https://cdn.8thwall.com/web/img/loading/v1/safari-icon.png"
+          style="max-height: 4vh" /><b>Safari</b>
+      </li>
       <li>Enable <span class="highlight">Motion&nbsp;&amp;&nbsp;Orientation Access</span></li>
-      <li>Reload the page <img class="foreground-image" style="transform: rotate(130deg);" src="//cdn.8thwall.com/web/img/loading/v2/reload.svg"></li>
+      <li>
+        Reload the page
+        <img
+          class="foreground-image"
+          style="transform: rotate(130deg)"
+          src="//cdn.8thwall.com/web/img/loading/v2/reload.svg" />
+      </li>
     </ol>
     <!-- Empty footer to take up space -->
     <div class="loading-error-footer"></div>
@@ -178,19 +289,28 @@
   <div id="userPromptError" class="permission-error absolute-fill hidden">
     <h1>Permissions were denied.</h1>
     <p>You need to accept motion permissions to continue.</p>
-    <button id="reloadButton" class="main-button" onClick="window.location.reload()">Refresh</button>
+    <button id="reloadButton" class="main-button" onClick="window.location.reload()">
+      Refresh
+    </button>
   </div>
 
   <div id="motionPermissionsErrorApple" class="permission-error absolute-fill hidden">
     <h1>Permissions were denied.</h1>
     <p>You've prevented the page from accessing your motion sensors.</p>
-    <p>Please close <span class='wk-app-name'></span> app to reenable your motion sensors.</p>
+    <p>Please close <span class="wk-app-name"></span> app to reenable your motion sensors.</p>
   </div>
 
   <div id="cameraSelectionWorldTrackingError" class="permission-error absolute-fill hidden">
-    <p><img height="75px" src="//cdn.8thwall.com/web/img/runtimeerror/v1/computer-voxel.png" class="floater"></p>
+    <p>
+      <img
+        height="75px"
+        src="//cdn.8thwall.com/web/img/runtimeerror/v1/computer-voxel.png"
+        class="floater" />
+    </p>
     <div class="error-text-header">Oops, something went wrong!</div>
     <p id="camera_mode_world_tracking_error"></p>
   </div>
-  <div id='debug-message' style='color:#eee; word-break: break-all; position:absolute; top:0'></div>
+  <div
+    id="debug-message"
+    style="color: #eee; word-break: break-all; position: absolute; top: 0"></div>
 </div>

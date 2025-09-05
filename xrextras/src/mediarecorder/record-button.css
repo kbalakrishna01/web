@@ -1,10 +1,10 @@
 .recorder-container {
   position: fixed;
-  width: 25vmin;
-  height: 25vmin;
+  width: 18vmin;
+  height: 18vmin;
   max-width: 10em;
   max-height: 10em;
-  bottom: 3vmin;
+  bottom: 14vmin;
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
@@ -13,28 +13,55 @@
 
 #recorder-button {
   display: block;
-  border: none;
-  outline: none;
-  margin: 0;
-  padding: 0;
-  box-shadow: none;
   position: absolute;
-  background: white;
-  border-radius: 50%;
-  color: transparent;
-  top: 0;
-  left: 0;
-  transform-origin: 50% 50%;
-  transform: scale(0.6);
-  transition: 0.3s border-radius, 0.3s transform;
   width: 100%;
   height: 100%;
+  background: #030150;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  transform: scale(0.6);
+  transition: 0.3s border-radius, 0.3s transform;
+  pointer-events: auto;
+  margin: 0;
+  padding: 0;
+}
+
+#tapText {
+  border-radius: 113.358px;
+  background: rgb(121 121 121 / 36%);
+  backdrop-filter: blur(1.1335774660110474px);
+  position: absolute;
+  z-index: 2;
+  bottom: 8vmin;
+  color: white;
+  font-size: 0.5rem;
+  width: max-content;
+  padding: 0.1rem 0.6rem 0.1rem 0.6rem;
+}
+
+.recorder-icon-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  padding: 12px; /* Adjust for desired circle size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recorder-icon-circle img {
+  width: 9vmin;
+  height: 9vmin;
+  object-fit: contain;
 }
 
 .progress-container {
   display: block;
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
@@ -42,13 +69,15 @@
   transition: 0.3s transform, 0.3s opacity;
 }
 
-.progress-track, .progress-bar, .loading-circle {
+.progress-track,
+.progress-bar,
+.loading-circle {
   fill: transparent;
-  stroke-width: 3;
+  stroke-width: 1.2;
 }
 
 .progress-track {
-  stroke: white;
+  stroke: #ce9009;
 }
 
 .progress-bar {
@@ -61,12 +90,14 @@
   stroke-dashoffset: 100;
 }
 
-.recording .progress-container, .loading .progress-container {
+.recording .progress-container,
+.loading .progress-container {
   opacity: 1;
   transform: scale(1);
 }
 
-.recording .progress-track, .loading .progress-track {
+.recording .progress-track,
+.loading .progress-track {
   transition: 0.8s stroke;
   stroke: #fff5;
 }
@@ -118,7 +149,7 @@
 
 @keyframes record-button-spin {
   0% {
-  transform: rotate(-90deg);
+    transform: rotate(-90deg);
   }
   100% {
     transform: rotate(270deg);
