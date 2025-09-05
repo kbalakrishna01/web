@@ -233,7 +233,7 @@
 
 #loadBackground {
   background-color: #1e61cd; /* solid blue fallback */
-  background-image: url('../../assets/ui/Loading_Bg.jpg');
+  background-image: url('../assets/ui/Loading_Bg.jpg');
   background-position: top;
   background-size: cover;
   background-repeat: no-repeat;
