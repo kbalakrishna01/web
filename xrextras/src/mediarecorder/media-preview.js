@@ -71,6 +71,9 @@ const setMuted = (muted) => {
 
 const closePreview = () => {
   const wasPending = videoPending
+
+  window.dispatchEvent(new CustomEvent('VideoPaused'))
+
   clearState()
   imagePreview.removeAttribute('src')
   videoPreview.pause()
@@ -171,6 +174,9 @@ const showVideoPreview = ({videoBlob}) => {
 
     setMuted(false)
     videoPreview.play().then(() => {
+      // Dispatch custom event when video starts playing
+      window.dispatchEvent(new CustomEvent('Videoplaying'))
+
       // On iOS, this fixes the audio playback issue with volume being very low
       if (window.XR8.XrDevice.deviceEstimate().os === 'iOS') {
         videoPreview.pause()
@@ -179,7 +185,10 @@ const showVideoPreview = ({videoBlob}) => {
     }).catch(() => {
       // If the play command failed, retry with the video muted
       setMuted(true)
-      videoPreview.play()
+      videoPreview.play().then(() => {
+        // Dispatch custom event when video starts playing (even muted)
+        window.dispatchEvent(new CustomEvent('Videoplaying'))
+      })
     })
   }
 
@@ -234,7 +243,7 @@ const showVideoHandler = (event) => {
       downloadFile()
       break
     default:
-      // Nothing
+        // Nothing
   }
   afterFinalizeAction = null
 }
@@ -262,12 +271,10 @@ const initMediaPreview = (options = {}) => {
 
   const downloadButton = document.getElementById('downloadButton')
   const actionButton = document.getElementById('actionButton')
-  const actionButtonText = document.getElementById('actionButtonText')
-  const actionButtonImg = document.getElementById('actionButtonImg')
 
   // Checks for WKWebView's that can't download: https://github.com/eligrey/FileSaver.js/issues/686
   const browser = window.XR8.XrDevice.deviceEstimate().browser.inAppBrowser ||
-    window.XR8.XrDevice.deviceEstimate().browser.name
+        window.XR8.XrDevice.deviceEstimate().browser.name
   const isWKWebViewiOS = ['Microsoft Edge', 'Google Chrome', 'Mozilla Firefox Focus', 'Firefox',
     'Opera Touch', 'Pinterest', 'Snapchat', 'Instagram', 'Facebook', 'Facebook Messenger', 'Line',
     'LinkedIn', 'Naver', 'Baidu', 'Brave'].includes(browser)
@@ -283,8 +290,6 @@ const initMediaPreview = (options = {}) => {
   // Check if Web Share API Level 2 is supported
   if (navigator.canShare && navigator.canShare(shareTestObj)) {
     webShareAPILevel2 = true
-    actionButtonText.textContent = options.actionButtonShareText || 'Share'
-    actionButtonImg.src = '//cdn.8thwall.com/web/img/mediarecorder/share-v1.svg'
     actionButton.addEventListener('click', share)
     if (window.XR8.XrDevice.deviceEstimate().os === 'iOS') {
       // Hide the download button on iOS and only allow sharing.
@@ -297,8 +302,6 @@ const initMediaPreview = (options = {}) => {
     actionButton.parentNode.removeChild(actionButton)
     downloadButton.parentNode.removeChild(downloadButton)
   } else if (window.XR8.XrDevice.deviceEstimate().os === 'iOS') {
-    actionButtonText.textContent = options.actionButtonViewText || 'View'
-    actionButtonImg.src = '//cdn.8thwall.com/web/img/mediarecorder/view-v1.svg'
     actionButton.addEventListener('click', openIosDownload)
     actionButton.classList.add('show-after-download')
   } else {
