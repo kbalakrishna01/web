@@ -1,6 +1,6 @@
 import htmlContent from './media-preview.html'
 import './media-preview.css'
-import {configure, getConfig} from './capture-config'
+import { configure, getConfig } from './capture-config'
 
 const IOS_DOWNLOAD_LOCATION = 'shareddocuments:///private/var/mobile/Library/Mobile Documents/com~apple~CloudDocs/Downloads/'
 
@@ -33,6 +33,16 @@ let imagePreview
 let videoPreview
 let muteButtonImg
 let finalizeProgressBar
+
+// Extract URL parameters and scene information
+const getSceneInfo = () => {
+  const params = new URLSearchParams(document.location.search.substring(1));
+  const pColor = params.get('p') ? params.get('p') : '';
+  const scene = pColor === 'r' ? 'receiver' : 'sender';
+  const scenePrefix = scene === 'receiver' ? 'R' : 'S';
+
+  return { pColor, scene, scenePrefix };
+}
 
 const clearState = () => {
   currentBlob = null
@@ -110,6 +120,9 @@ const share = () => {
     return
   }
 
+  // Get scene information for analytics
+  const { scene } = getSceneInfo();
+
   const fileToInclude = new File([currentBlob], currentFilename, {
     type: previewIsImage ? 'image/jpeg' : 'video/mp4',
     lastModified: Date.now(),
@@ -119,6 +132,15 @@ const share = () => {
     title: '',
     text: '',
     files: [fileToInclude],
+  }
+
+  // Push analytics event for share action with different categories for sender/receiver
+  if (window.dataLayer) {
+    const category = scene === 'receiver' ? 'RF_GreetingPhotoShare_Click' : 'SF3_Photo/VideoShare_Click';
+    window.dataLayer.push({
+      'event': 'UltraTwo',
+      'category': category,
+    });
   }
 
   navigator.share(shareObject)
@@ -140,7 +162,7 @@ const showPreview = () => {
   }, 100)
 }
 
-const showImagePreview = ({blob}) => {
+const showImagePreview = ({ blob }) => {
   clearState()
   currentBlob = blob
   currentUrl = URL.createObjectURL(blob)
@@ -155,7 +177,7 @@ const showImagePreview = ({blob}) => {
   }
 }
 
-const showVideoPreview = ({videoBlob}) => {
+const showVideoPreview = ({ videoBlob }) => {
   clearState()
   currentBlob = videoBlob
   currentUrl = URL.createObjectURL(videoBlob)
@@ -229,7 +251,7 @@ const showVideoHandler = (event) => {
 
   previewContainer.classList.remove('finalize-waiting')
   videoPending = false
-  const {videoBlob} = event.detail
+  const { videoBlob } = event.detail
   // Keep a reference to the preview URL so we can revoke it on close
   visibleObjectUrl = currentUrl
   currentBlob = videoBlob
@@ -243,7 +265,7 @@ const showVideoHandler = (event) => {
       downloadFile()
       break
     default:
-        // Nothing
+    // Nothing
   }
   afterFinalizeAction = null
 }
@@ -274,7 +296,7 @@ const initMediaPreview = (options = {}) => {
 
   // Checks for WKWebView's that can't download: https://github.com/eligrey/FileSaver.js/issues/686
   const browser = window.XR8.XrDevice.deviceEstimate().browser.inAppBrowser ||
-        window.XR8.XrDevice.deviceEstimate().browser.name
+    window.XR8.XrDevice.deviceEstimate().browser.name
   const isWKWebViewiOS = ['Microsoft Edge', 'Google Chrome', 'Mozilla Firefox Focus', 'Firefox',
     'Opera Touch', 'Pinterest', 'Snapchat', 'Instagram', 'Facebook', 'Facebook Messenger', 'Line',
     'LinkedIn', 'Naver', 'Baidu', 'Brave'].includes(browser)

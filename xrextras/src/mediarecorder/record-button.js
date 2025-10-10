@@ -1,7 +1,7 @@
 import htmlContent from './record-button.html'
 import './record-button.css'
-import {configure, getConfig} from './capture-config'
-import {drawWatermark} from './watermark'
+import { configure, getConfig } from './capture-config'
+import { drawWatermark } from './watermark'
 
 const ACTIVE_TIMEOUT = 300
 let captureMode = 'standard'
@@ -17,6 +17,16 @@ let isWaitingOnFinal = false
 let container
 let flashElement
 let progressBar
+
+// Extract URL parameters and scene information
+const getSceneInfo = () => {
+  const params = new URLSearchParams(document.location.search.substring(1));
+  const pColor = params.get('p') ? params.get('p') : '';
+  const scene = pColor === 'r' ? 'receiver' : 'sender';
+  const scenePrefix = scene === 'receiver' ? 'R' : 'S';
+
+  return { pColor, scene, scenePrefix };
+}
 
 const clearDisplayState = () => {
   container.classList.remove('fade-container')
@@ -56,12 +66,14 @@ const previewClosed = () => {
 
 const takeScreenshot = () => {
   const currentConfig = getConfig()
+  const { scene } = getSceneInfo()
+
   status = 'flash'
   flashElement.classList.add('flashing')
   window.XR8.CanvasScreenshot.takeScreenshot({
-    onProcessFrame: ({ctx}) => {
+    onProcessFrame: ({ ctx }) => {
       if (currentConfig.onProcessFrame) {
-        currentConfig.onProcessFrame({ctx})
+        currentConfig.onProcessFrame({ ctx })
       }
       drawWatermark(ctx)
     },
@@ -75,10 +87,19 @@ const takeScreenshot = () => {
         array[i] = bytes.charCodeAt(i)
       }
 
-      const blob = new Blob([buffer], {type: 'image/jpeg'})
+      const blob = new Blob([buffer], { type: 'image/jpeg' })
+
+      // Push analytics event for photo completion (standard mode) with different categories for sender/receiver
+      if (window.dataLayer && captureMode === 'standard') {
+        const category = scene === 'receiver' ? 'RE_GreetingsPhoto/videoCapture' : 'SF2_Photo/VideoTaken';
+        window.dataLayer.push({
+          'event': 'UltraTwo',
+          'category': category,
+        });
+      }
 
       clearState()
-      window.dispatchEvent(new CustomEvent('mediarecorder-photocomplete', {detail: {blob}}))
+      window.dispatchEvent(new CustomEvent('mediarecorder-photocomplete', { detail: { blob } }))
     }
   ).catch(() => {
     clearState()
@@ -114,25 +135,37 @@ const startRecording = () => {
 
   XR8.MediaRecorder.recordVideo({
     onVideoReady: (result) => {
+      const { scene } = getSceneInfo()
+
       isWaitingOnFinal = false
       if (status === 'finalize-blocked') {
         clearState()
       }
-      window.dispatchEvent(new CustomEvent('mediarecorder-recordcomplete', {detail: result}))
+
+      // Push analytics event for video completion with different categories for sender/receiver
+      if (window.dataLayer) {
+        const category = scene === 'receiver' ? 'RE_GreetingsPhoto/videoCapture' : 'SF2_Photo/VideoTaken';
+        window.dataLayer.push({
+          'event': 'UltraTwo',
+          'category': category,
+        });
+      }
+
+      window.dispatchEvent(new CustomEvent('mediarecorder-recordcomplete', { detail: result }))
     },
     onStart: (result) => {
-      window.dispatchEvent(new CustomEvent('mediarecorder-recordstart', {detail: result}))
+      window.dispatchEvent(new CustomEvent('mediarecorder-recordstart', { detail: result }))
     },
     onStop: (result) => {
-      window.dispatchEvent(new CustomEvent('mediarecorder-recordstop', {detail: result}))
+      window.dispatchEvent(new CustomEvent('mediarecorder-recordstop', { detail: result }))
       showLoading()
     },
     onError: (result) => {
-      window.dispatchEvent(new CustomEvent('mediarecorder-recorderror', {detail: result}))
+      window.dispatchEvent(new CustomEvent('mediarecorder-recorderror', { detail: result }))
       clearState()
     },
     onProcessFrame: (frameInfo) => {
-      const {elapsedTimeMs, maxRecordingMs, ctx} = frameInfo
+      const { elapsedTimeMs, maxRecordingMs, ctx } = frameInfo
       const timeLeft = (1 - elapsedTimeMs / maxRecordingMs)
       progressBar.style.strokeDashoffset = `${100 * timeLeft}`
       if (currentConfig.onProcessFrame) {
@@ -142,10 +175,10 @@ const startRecording = () => {
     },
     onPreviewReady: (result) => {
       isWaitingOnFinal = true
-      window.dispatchEvent(new CustomEvent('mediarecorder-previewready', {detail: result}))
+      window.dispatchEvent(new CustomEvent('mediarecorder-previewready', { detail: result }))
     },
     onFinalizeProgress: result => window.dispatchEvent(
-      new CustomEvent('mediarecorder-finalizeprogress', {detail: result})
+      new CustomEvent('mediarecorder-finalizeprogress', { detail: result })
     ),
   })
 }
@@ -178,6 +211,9 @@ const down = (e) => {
   }
   isDown = true
 
+  // Get scene information
+  const { scene } = getSceneInfo();
+
   if (captureMode === 'fixed') {
     if (status === 'waiting') {
       status = 'active'
@@ -187,9 +223,27 @@ const down = (e) => {
     } else if (status === 'recording') {
       endRecording()
     }
+
+    // Push analytics event based on scene type with different categories for sender/receiver
+    if (window.dataLayer) {
+      const category = scene === 'receiver' ? 'RE_GreetingsPhoto/videoCapture' : 'SF2_Photo/VideoTaken';
+      window.dataLayer.push({
+        'event': 'UltraTwo',
+        'category': category,
+      });
+    }
   } else if (captureMode === 'photo') {
     container.classList.add('active')
     takeScreenshot()
+
+    // Push analytics event for photo capture with different categories for sender/receiver
+    if (window.dataLayer) {
+      const category = scene === 'receiver' ? 'RE_GreetingsPhoto/videoCapture' : 'SF2_Photo/VideoTaken';
+      window.dataLayer.push({
+        'event': 'UltraTwo',
+        'category': category,
+      });
+    }
   } else if (status === 'waiting') {
     // Standard mode down starts active state
     goActive()
